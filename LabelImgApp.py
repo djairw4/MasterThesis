@@ -90,6 +90,7 @@ class Window(QMainWindow, Ui_MainWindow):
                                         self.rect_start.y() / (self.scale * self.current_image_h), 
                                         self.rect_end.x() / (self.scale * self.current_image_w), 
                                         self.rect_end.y() / (self.scale * self.current_image_h)])
+            print(self.bounding_boxes)
             painter.drawRect(rect.normalized()) 
             self.rect_start, self.rect_end = QPoint(), QPoint()
             self.update()
@@ -101,6 +102,7 @@ class Window(QMainWindow, Ui_MainWindow):
             with open(file_path, 'w') as file:
                 for i in self.bounding_boxes:
                     file.write(str(i[0]) + "," + str(i[1]) + ',' + str(i[2]) + ',' + str(i[3]))
+                    # print(i)
             self.bounding_boxes.clear()
         self.index = (self.index + 1) % len(self.image_names)
         self.show_image()
